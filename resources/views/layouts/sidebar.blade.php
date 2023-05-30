@@ -71,6 +71,25 @@
                     </ul>
                 </li>
 
+                <li class="nav-item @yield('data.schedule')">
+                    <a href="#" class="nav-link @yield('nav')">
+                        <i class="nav-icon fas fa-calendar"></i>
+                        <p>
+                            Jadwal
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{route('schedule.index')}}" class="nav-link @yield('schedule')">
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-bars nav-icon"></i>
+                                <p>Data Jadwal</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
 
             </ul>
         </nav>

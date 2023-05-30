@@ -14,4 +14,9 @@ class ClassEducation extends Model
         'created_at',
         'updated_at',
     ];
+
+    public function schedule()
+    {
+        return $this->hasMany(Schedule::class);
+    }
 }
