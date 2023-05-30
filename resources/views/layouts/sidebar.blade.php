@@ -4,7 +4,7 @@
         {{-- <img src="{{ asset('admin/dist/images/logo-lam-kprs.png') }}" alt="AdminLTE Logo" style="width:200px"> --}}
         {{-- <img src="{{ asset('admin/dist/images/logo-lam-kprs.png') }}" alt="AdminLTE Logo" class="brand-image"
             style="width: 20"> --}}
-        <span class="brand-text font-weight-light">Inserd</span>
+        <span class="brand-text font-weight-light">Absensi</span>
     </a>
 
     <!-- Sidebar -->
@@ -50,31 +50,27 @@
                         </li>
                     </ul>
                 </li>
-                <li class="nav-item @yield('notif')">
+
+
+                <li class="nav-item @yield('data.class')">
                     <a href="#" class="nav-link @yield('nav')">
-                        <i class="nav-icon fa fa-bullhorn" aria-hidden="true"></i>
+                        <i class="nav-icon fas fa-graduation-cap"></i>
                         <p>
-                            Notifikasi
+                            Kelas
                             <i class="fas fa-angle-left right"></i>
                         </p>
                     </a>
 
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="#" class="nav-link @yield('category')">
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <i class="fa fa-th-large nav-icon" aria-hidden="true"></i>
-                                <p>Kategori Notifikasi</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link @yield('index')">
+                            <a href="{{route('classEducation.index')}}" class="nav-link @yield('class')">
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-bars nav-icon"></i>
-                                <p>Data Notification</p>
+                                <p>Data Kelas</p>
                             </a>
                         </li>
                     </ul>
                 </li>
+
 
             </ul>
         </nav>

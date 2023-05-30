@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>INSERD | @yield('title')</title>
+    <title>Absensi | @yield('title')</title>
 
     {{--
     <link rel="icon" type="image/png" href="{{ asset('landing/images/logo/logo-lamkprs.png') }}" sizes="16x16"> --}}
