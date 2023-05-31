@@ -49,6 +49,12 @@
                                             <form action="{{ route('schedule.destroy', $item->id) }}" method="POST">
                                                 @method('DELETE') @csrf
                                                 <div class="btn-group" role="group" aria-label="Basic example">
+                                                    @if ($item->day == $dayNow)
+                                                    <a href="{{route('generate.qr', $item->user_id)}}"
+                                                        class="btn btn-sm btn-outline-info">
+                                                        QR
+                                                    </a>
+                                                    @endif
                                                     <a href="{{ route('schedule.edit', $item->id)}}"
                                                         class="btn btn-sm btn-outline-secondary">
                                                         Edit

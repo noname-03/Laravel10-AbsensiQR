@@ -2,25 +2,27 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Qr;
 use App\Models\Schedule;
 use App\Models\User;
 use App\Models\ClassEducation;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class ScheduleController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
+        $now = Carbon::now();
+        $date = Carbon::parse($now)->locale('id');
+        $date->settings(['formatFunction' => 'translatedFormat']);
+        $dayNow = $date->format('l');
         $schedules = Schedule::all();
-        return view('pages.schedule.index', compact('schedules'));
+        return view('pages.schedule.index', compact('schedules', 'dayNow'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         $classEducations = ClassEducation::all();
@@ -28,9 +30,6 @@ class ScheduleController extends Controller
         return view('pages.schedule.create', compact('classEducations', 'users'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $request->validate([
@@ -46,17 +45,11 @@ class ScheduleController extends Controller
         return redirect()->route('schedule.index');
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Schedule $schedule)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit($id)
     {
         $schedule = Schedule::findOrFail($id);
@@ -65,9 +58,6 @@ class ScheduleController extends Controller
         return view('pages.schedule.edit', compact('schedule', 'classEducations', 'users'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, $id)
     {
         $request->validate([
@@ -84,13 +74,30 @@ class ScheduleController extends Controller
         return redirect()->route('schedule.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy($id)
     {
         $schedule = Schedule::findOrFail($id);
         $schedule->delete();
         return redirect()->route('schedule.index');
+    }
+
+    public function qr($id)
+    {
+        $unique = Str::uuid();
+        Qr::create([
+            'user_id' => $id,
+            'code' => $unique,
+        ]);
+        return response()->streamDownload(
+            function () use ($unique) {
+                echo QrCode::size(200)
+                    ->format('png')
+                    ->generate($unique);
+            },
+            'qr-code.png',
+            [
+                'Content-Type' => 'image/png',
+            ]
+        );
     }
 }

@@ -24,4 +24,6 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('/user', App\Http\Controllers\UserController::class);
     Route::resource('/classEducation', App\Http\Controllers\ClassEducationController::class);
     Route::resource('/schedule', App\Http\Controllers\ScheduleController::class);
+    Route::get('/generate/qr/{id}', [App\Http\Controllers\ScheduleController::class, 'qr'])->name('generate.qr');
+    Route::post('/check/qr/{unique}/', [App\Http\Controllers\ScheduleController::class, 'checkqr'])->name('check.qr');
 });

@@ -47,4 +47,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Schedule::class);
     }
+
+    public function qr()
+    {
+        return $this->hasOne(Qr::class);
+    }
 }
