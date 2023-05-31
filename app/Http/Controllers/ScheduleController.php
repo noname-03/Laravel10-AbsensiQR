@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Attendances;
 use App\Models\Qr;
 use App\Models\Schedule;
 use App\Models\User;
@@ -10,16 +11,29 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
+use Auth;
 
 class ScheduleController extends Controller
 {
+    // construct
+    public function __construct()
+    {
+        // middleware only qr role teacher
+        $this->middleware(['role:admin'], ['only' => ['create', 'edit', 'update', 'destroy']]); //yang bisa ini cuma admin
+    }
+
     public function index()
     {
         $now = Carbon::now();
         $date = Carbon::parse($now)->locale('id');
         $date->settings(['formatFunction' => 'translatedFormat']);
         $dayNow = $date->format('l');
-        $schedules = Schedule::all();
+        if (Auth::user()->hasRole('admin')) {
+            $schedules = Schedule::all();
+        } else {
+            $user = Auth::user()->id;
+            $schedules = Schedule::where('user_id', $user)->get();
+        }
         return view('pages.schedule.index', compact('schedules', 'dayNow'));
     }
 
@@ -81,11 +95,12 @@ class ScheduleController extends Controller
         return redirect()->route('schedule.index');
     }
 
-    public function qr($id)
+    public function qr($id, $user) //generate qr
     {
         $unique = Str::uuid();
         Qr::create([
-            'user_id' => $id,
+            'schedule_id' => $id,
+            'user_id' => $user,
             'code' => $unique,
         ]);
         return response()->streamDownload(
@@ -99,5 +114,31 @@ class ScheduleController extends Controller
                 'Content-Type' => 'image/png',
             ]
         );
+    }
+
+    public function scanqr()
+    {
+        return view('pages.schedule.scan');
+    }
+
+    public function checkqr(Request $request)
+    {
+        $qr = Qr::where('code', $request->code)->first();
+        if ($qr) {
+            Attendances::create([
+                'schedule_id' => $qr->schedule_id,
+                'status' => 'hadir'
+            ]);
+            $qr->delete();
+            return response()->json([
+                'status' => 200,
+                'data' => $qr,
+            ]);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => 'QR Code Tidak Di Temukan'
+            ]);
+        }
     }
 }

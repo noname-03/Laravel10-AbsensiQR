@@ -10,12 +10,11 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('qr', function (Blueprint $table) {
+        Schema::create('attendances', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('schedule_id');
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->string('code')->unique();
+            $table->foreign('schedule_id')->references('id')->on('schedules')->onDelete('cascade');
+            $table->enum('status', ['hadir', 'izin']);
             $table->timestamps();
         });
     }
@@ -25,6 +24,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('qr');
+        Schema::dropIfExists('attendances');
     }
 };

@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('login');
 });
 
 Auth::routes();
@@ -24,6 +24,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('/user', App\Http\Controllers\UserController::class);
     Route::resource('/classEducation', App\Http\Controllers\ClassEducationController::class);
     Route::resource('/schedule', App\Http\Controllers\ScheduleController::class);
-    Route::get('/generate/qr/{id}', [App\Http\Controllers\ScheduleController::class, 'qr'])->name('generate.qr');
-    Route::post('/check/qr/{unique}/', [App\Http\Controllers\ScheduleController::class, 'checkqr'])->name('check.qr');
+    Route::get('/generate/qr/{id}/{user_id}', [App\Http\Controllers\ScheduleController::class, 'qr'])->name('generate.qr');
+    Route::get('/scan/qr', [App\Http\Controllers\ScheduleController::class, 'scanqr'])->name('scan.qr');
+    Route::post('/check/qr', [App\Http\Controllers\ScheduleController::class, 'checkqr'])->name('check.qr');
 });

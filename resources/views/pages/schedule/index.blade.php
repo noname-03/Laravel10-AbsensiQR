@@ -21,11 +21,12 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card">
+                        @role('admin')
                         <div class="card-header">
                             <a href="{{ route('schedule.create') }}" type="button" class="btn btn-primary btn-sm">Tambah
                                 Data</a>
-
                         </div>
+                        @endrole
                         <!-- /.card-header -->
                         <div class="card-body">
                             <table id="example3" class="table table-bordered table-striped">
@@ -46,11 +47,12 @@
                                         <td>{{ $item->classEducation->title }}</td>
                                         <td>{{ $item->day }}</td>
                                         <td style="text-align: center;">
+                                            @role('admin')
                                             <form action="{{ route('schedule.destroy', $item->id) }}" method="POST">
                                                 @method('DELETE') @csrf
                                                 <div class="btn-group" role="group" aria-label="Basic example">
                                                     @if ($item->day == $dayNow)
-                                                    <a href="{{route('generate.qr', $item->user_id)}}"
+                                                    <a href="{{route('generate.qr', [$item->id, $item->user_id])}}"
                                                         class="btn btn-sm btn-outline-info">
                                                         QR
                                                     </a>
@@ -65,7 +67,16 @@
                                                     </button>
                                                 </div>
                                             </form>
-
+                                            @endrole
+                                            @role('teacher')
+                                            @if ($item->day == $dayNow)
+                                            <a href="{{ route('scan.qr')}}" class="btn btn-sm btn-outline-secondary">
+                                                Scan QR
+                                            </a>
+                                            @else
+                                            <p>Tidak Ada Jadwal</p>
+                                            @endif
+                                            @endrole
                                         </td>
                                     </tr>
                                     @endforeach

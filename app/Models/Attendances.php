@@ -5,20 +5,20 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Qr extends Model
+class Attendances extends Model
 {
     use HasFactory;
 
-    protected $table = 'qr';
+    protected $table = 'attendances';
 
     protected $fillable = [
         'schedule_id',
-        'user_id',
-        'code',
+        'status'
     ];
 
-    public function user()
+
+    public function schedule()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Schedule::class);
     }
 }
