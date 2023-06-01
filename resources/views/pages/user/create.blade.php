@@ -43,6 +43,14 @@
                                         @enderror
                                     </div>
                                     <div class="form-group col-md-4">
+                                        <label>Role</label>
+                                        <select class="form-control" name="role">
+                                            @foreach ($role as $item)
+                                            <option value="{{$item->name}}">{{$item->name}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-md-4">
                                         <label for="email">Email</label>
                                         <input type="text" class="form-control  @error('email')
                                             is-invalid

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
@@ -17,7 +18,8 @@ class UserController extends Controller
 
     public function create()
     {
-        return view('pages.user.create');
+        $role = Role::all();
+        return view('pages.user.create', compact('role'));
     }
 
     public function store(Request $request)
@@ -25,6 +27,7 @@ class UserController extends Controller
         $input = $request->all();
         $input['password'] = Hash::make($input['password']);
         $user = User::create($input);
+        $user->assignRole($request->role);
 
         return redirect()->route('user.index');
     }
@@ -37,7 +40,8 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = User::findOrFail($id);
-        return view('pages.user.edit', compact('user'));
+        $role = Role::all();
+        return view('pages.user.edit', compact('user', 'role'));
     }
 
     public function update(Request $request, $id)
@@ -50,6 +54,11 @@ class UserController extends Controller
             $input = Arr::except($input, array('password'));
         }
         $user->update($input);
+        if (!empty($input['role'])) {
+            $user->syncRoles($request->input('role'));
+        } else {
+            $user->removeRole($user->roles->pluck('name')[0]);
+        }
         return redirect()->route('user.index');
     }
 

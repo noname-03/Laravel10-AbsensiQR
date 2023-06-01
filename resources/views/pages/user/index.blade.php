@@ -34,7 +34,7 @@
                                         <th style="width: 7%">No</th>
                                         <th style="width: 25%">Nama</th>
                                         <th style="width: 25%">Email</th>
-                                        <th style="width: 25%">Phone</th>
+                                        <th style="width: 25%">Role</th>
                                         <th style="width: 18%">Action</th>
                                     </tr>
                                 </thead>
@@ -44,7 +44,7 @@
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $item->name }}</td>
                                         <td>{{ $item->email }}</td>
-                                        <td>{{ $item->phone }}</td>
+                                        <td>{{ $item->roles[0]['name'] }}</td>
                                         <td style="text-align: center;">
                                             <form action="{{ route('user.destroy', $item->id) }}" method="POST">
                                                 @method('DELETE') @csrf
