@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>LAM KPRS | Login</title>
+    <title>Absensi | Login</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
@@ -22,14 +22,11 @@
         <!-- /.login-logo -->
         <div class="card card-outline card-primary">
             <div class="card-header text-center">
-                <p class="h1"><b>Lorem</b>Ipsum</p>
+                <p class="h1"><b>Aplikasi</b>Absensi</p>
             </div>
             <div class="card-body">
-                <p class="login-box-msg">It is a long established fact that a reader will be distracted by the readable
-                    content of a page when looking at its layout.
+                <p class="login-box-msg">Silahkan Login Menggunakan Email Dan Password Yang Sudah Di Berikan Admin
                 </p>
-                <p class="login-box-msg">or-less normal distribution of letters, as opposed to using 'Content here,
-                    content here', making it look like readable English.</p>
                 @if(Session::has('fail'))
                 <div class="alert alert-danger">
                     {{Session::get('fail')}}

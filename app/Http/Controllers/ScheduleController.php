@@ -131,8 +131,7 @@ class ScheduleController extends Controller
             ]);
             $qr->delete();
             return response()->json([
-                'status' => 200,
-                'data' => $qr,
+                'status' => 200
             ]);
         } else {
             return response()->json([

@@ -24,11 +24,11 @@
                 <!-- /.card-header -->
                 <div class="card-body" style="display: block;">
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-6">
                             <div class="form-row">
                                 <div class="form-group col-12">
-                                    <label for="name">Nama</label>
-                                    <div id="reader" style="width: 50%"></div>
+                                    <label for="name">Scan</label>
+                                    <div id="reader"></div>
                                 </div>
                             </div>
                         </div>

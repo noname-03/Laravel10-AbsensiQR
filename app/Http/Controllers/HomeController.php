@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ClassEducation;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Auth;
+use App\Models\Schedule;
 
 class HomeController extends Controller
 {
@@ -23,6 +27,14 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        if (Auth::user()->hasRole('admin')) {
+            $schedules = Schedule::count();
+        } else {
+            $user = Auth::user()->id;
+            $schedules = Schedule::where('user_id', $user)->count();
+        }
+        $user = User::count();
+        $classEducation = ClassEducation::count();
+        return view('home', compact('schedules', 'user', 'classEducation'));
     }
 }

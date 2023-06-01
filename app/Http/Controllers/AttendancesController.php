@@ -3,21 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Models\Attendances;
+use App\Models\Schedule;
 use Illuminate\Http\Request;
 
 class AttendancesController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function index($id)
     {
-        //
+        $schedule = Schedule::findOrFail($id);
+        return view('pages.attendances.index', compact('schedule'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         //

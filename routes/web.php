@@ -27,4 +27,5 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/generate/qr/{id}/{user_id}', [App\Http\Controllers\ScheduleController::class, 'qr'])->name('generate.qr');
     Route::get('/scan/qr', [App\Http\Controllers\ScheduleController::class, 'scanqr'])->name('scan.qr');
     Route::post('/check/qr', [App\Http\Controllers\ScheduleController::class, 'checkqr'])->name('check.qr');
+    Route::get('/attendance/{id}', [App\Http\Controllers\AttendancesController::class, 'index'])->name('attendance.index');
 });
