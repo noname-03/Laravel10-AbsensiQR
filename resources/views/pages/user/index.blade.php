@@ -49,10 +49,6 @@
                                             <form action="{{ route('user.destroy', $item->id) }}" method="POST">
                                                 @method('DELETE') @csrf
                                                 <div class="btn-group" role="group" aria-label="Basic example">
-                                                    <a href="{{ route('user.show', $item->id) }}"
-                                                        class="btn btn-sm btn-outline-info">
-                                                        Show
-                                                    </a>
                                                     <a href="{{ route('user.edit', $item->id)}}"
                                                         class="btn btn-sm btn-outline-secondary">
                                                         Edit
