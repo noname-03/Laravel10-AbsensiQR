@@ -46,9 +46,12 @@
                                         <label>Role</label>
                                         <select class="form-control" name="role">
                                             @foreach ($role as $item)
-                                            <option
-                                                value="{{$item->name}} {{$user->roles[0]['name'] == $item->name ? 'selectef' : ''}}">
-                                                {{$item->name}}</option>
+                                            @php
+                                            $a = 'teacher';
+                                            $b = 'teacjer';
+                                            @endphp
+                                            <option value="{{$item->name}}" {{$user->roles[0]['name'] == $item->name ?
+                                                'selected' : ''}}>{{$item->name}}</option>
                                             @endforeach
                                         </select>
                                     </div>
