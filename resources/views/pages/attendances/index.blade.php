@@ -48,41 +48,7 @@
                                         <td>{{ $schedule->classEducation->title }}</td>
                                         <td>{{ $item->status }}</td>
                                         <td style="text-align: center;">
-                                            {{$item->created_at->format('d-m-y')}}
-                                            {{-- @role('admin')
-                                            <form action="{{ route('schedule.destroy', $item->id) }}" method="POST">
-                                                @method('DELETE') @csrf
-                                                <div class="btn-group" role="group" aria-label="Basic example">
-                                                    @if ($item->day == $dayNow)
-                                                    <a href="{{route('generate.qr', [$item->id, $item->user_id])}}"
-                                                        class="btn btn-sm btn-outline-info">
-                                                        QR
-                                                    </a>
-                                                    @endif
-                                                    <a href="{{route('attendance.index', $item->id)}}"
-                                                        class="btn btn-sm btn-outline-success">
-                                                        Kehadiran
-                                                    </a>
-                                                    <a href="{{ route('schedule.edit', $item->id)}}"
-                                                        class="btn btn-sm btn-outline-secondary">
-                                                        Edit
-                                                    </a>
-                                                    <button type="submit" onclick="return confirm('Are you sure?')"
-                                                        class="btn btn-sm btn-outline-danger">
-                                                        Delete
-                                                    </button>
-                                                </div>
-                                            </form>
-                                            @endrole
-                                            @role('teacher')
-                                            @if ($item->day == $dayNow)
-                                            <a href="{{ route('scan.qr')}}" class="btn btn-sm btn-outline-secondary">
-                                                Scan QR
-                                            </a>
-                                            @else
-                                            <p>Tidak Ada Jadwal</p>
-                                            @endif
-                                            @endrole --}}
+                                            {{$item->created_at->format('d-m-Y H:i:s')}}
                                         </td>
                                     </tr>
                                     @endforeach
