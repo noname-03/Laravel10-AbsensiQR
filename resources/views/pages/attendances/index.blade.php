@@ -35,9 +35,11 @@
                                     <tr>
                                         <th style="width: 7%">No</th>
                                         <th style="width: 25%">Nama Guru</th>
-                                        <th style="width: 25%">Nama Kelas</th>
-                                        <th style="width: 25%">Status</th>
-                                        <th style="width: 18%">Tanggal</th>
+                                        <th style="width: 10%">Nama Kelas</th>
+                                        <th style="width: 3%">Status</th>
+                                        <th style="width: 25%">Keterangan</th>
+                                        <th style="width: 10%">Tanggal</th>
+                                        <th style="width: 10%">Lampiran</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -47,9 +49,20 @@
                                         <td>{{ $schedule->user->name }}</td>
                                         <td>{{ $schedule->classEducation->title }}</td>
                                         <td>{{ $item->status }}</td>
+                                        <td>{{ $item->note }}</td>
                                         <td style="text-align: center;">
                                             {{$item->created_at->format('d-m-Y H:i:s')}}
                                         </td>
+                                        @if ($item->file)
+                                        <td style="text-align: center;">
+                                            <a class="btn btn-sm btn-primary" href="{{asset('file' . $item->file)}}"
+                                                target="_blank" rel="noopener noreferrer">Lampiran</a>
+                                        </td>
+                                        @else
+                                        <td style="text-align: center;">
+                                            Tidak Ada Lampiran
+                                        </td>
+                                        @endif
                                     </tr>
                                     @endforeach
                                 </tbody>

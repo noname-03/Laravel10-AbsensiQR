@@ -125,9 +125,23 @@ class ScheduleController extends Controller
     {
         $qr = Qr::where('code', $request->code)->first();
         if ($qr) {
+            if ($request->status == 'hadir') {
+                $imageName = null;
+            } else {
+                if ($request->file === 'undefined') {
+                    return response()->json([
+                        'status' => 404,
+                        'message' => 'File Harus diisi'
+                    ]);
+                }
+                $imageName = time() . '.' . $request->file->extension();
+                $request->file->move(public_path('file'), $imageName);
+            }
             Attendances::create([
                 'schedule_id' => $qr->schedule_id,
-                'status' => 'hadir'
+                'status' => $request->status,
+                'file' => $imageName,
+                'note' => $request->note,
             ]);
             $qr->delete();
             return response()->json([

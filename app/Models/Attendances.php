@@ -13,7 +13,9 @@ class Attendances extends Model
 
     protected $fillable = [
         'schedule_id',
-        'status'
+        'status',
+        'note',
+        'file',
     ];
 
 

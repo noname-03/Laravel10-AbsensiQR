@@ -14,7 +14,9 @@ return new class extends Migration {
             $table->id();
             $table->unsignedBigInteger('schedule_id');
             $table->foreign('schedule_id')->references('id')->on('schedules')->onDelete('cascade');
-            $table->enum('status', ['hadir', 'izin']);
+            $table->enum('status', ['hadir', 'izin', 'sakit']);
+            $table->text('note')->nullable();
+            $table->text('file')->nullable();
             $table->timestamps();
         });
     }
