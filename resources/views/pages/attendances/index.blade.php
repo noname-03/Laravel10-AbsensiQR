@@ -55,7 +55,7 @@
                                         </td>
                                         @if ($item->file)
                                         <td style="text-align: center;">
-                                            <a class="btn btn-sm btn-primary" href="{{asset('file' . $item->file)}}"
+                                            <a class="btn btn-sm btn-primary" href="{{asset('file/' . $item->file)}}"
                                                 target="_blank" rel="noopener noreferrer">Lampiran</a>
                                         </td>
                                         @else
