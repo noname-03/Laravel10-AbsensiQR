@@ -60,10 +60,8 @@
                                         <select class="form-control selectpicker" name="class_education_id"
                                             data-live-search="true" @error('class_education_id') is-invalid @enderror>
                                             @foreach ($classEducations as $item)
-                                            <option value="{{ $item->id }}" {{$schedule->class_education_id ===
-                                                $item->id
-                                                ? 'selected' :
-                                                ''}}>{{ $item->title }}</option>
+                                            <option value="{{ $item->id }}" {{$schedule->class_education_id
+                                                === $item->id? 'selected' :''}}>{{ $item->title }}</option>
                                             @endforeach>
                                         </select>
                                         @error('class_education_id')
@@ -77,10 +75,8 @@
                                         <select class="form-control selectpicker" name="user_id" data-live-search="true"
                                             @error('user_id') is-invalid @enderror>
                                             @foreach ($users as $item)
-                                            <option value="{{ $item->id }}" {{$schedule->user_id ===
-                                                $item->id
-                                                ? 'selected' :
-                                                ''}}>{{ $item->name }}</option>
+                                            <option value="{{ $item->id }}" {{$schedule->user_id == $item->id ?
+                                                'selected' : ''}}>{{ $item->name }}</option>
                                             @endforeach>
                                         </select>
                                         @error('user_id')
